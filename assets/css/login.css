@@ -1,0 +1,104 @@
+#login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+#text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginForm {
+  background-color: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 2em;
+  width: 50%;
+}
+
+
+  .loginForm {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 2em;
+    width: 50%;
+  }
+
+  .loginForm .lastElement {
+    align-self: end;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 0.5em;
+    border: none;
+    border-bottom: solid 2px #dddddd;
+    font-size: 1em;
+    transition: border-color 0.3s ease-in-out;
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    outline: none;
+    border-color: #003468;
+  }
+
+  button[type="submit"] {
+    width: 40%;
+    place-self: center;
+    background-color: #003468;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em 1em;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    font-weight: bold;
+  }
+
+  button[type="submit"]:hover {
+    background-color: hsl(120, 100%, 22%);
+  }
+
+  /* Styles spécifiques pour les champs */
+  .field{
+    width: 80%;
+  }
+
+  .field_container{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1em;
+  }
+
+  /* Styles spécifiques pour les icônes */
+  .icon_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+  }
+
+  .icon {
+    font-size: 2em;
+    color: #00000091;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .icon_container:hover .icon {
+    transform: rotateY(360deg);
+  }
+
+  .validation:hover{
+    transform: rotateY(360deg);
+  }
