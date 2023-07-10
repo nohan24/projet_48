@@ -45,7 +45,7 @@ class Profil extends CI_Controller
             'email' => $this->input->post('email'),
             'passwrd' => $this->input->post('password')
         );
-        $this->db->insert('users', $data);
+        // $this->db->insert('users', $data);
         $data = array();
         $data['param'] = $this->Profils_model->get_parametre();
         $this->load->view('login/information', $data);
@@ -77,7 +77,6 @@ class Profil extends CI_Controller
         }
         $unchecked = array_diff($p, $restrictions);
         $unchecked = array_values($unchecked);
-        var_dump($unchecked);
         for ($j = 0; $j < count($unchecked); $j++) {
             $restriction = array(
                 'user_id' => $user,

@@ -44,7 +44,7 @@
               <input type="submit" value="Se connecter" class="btn btn-block btn-primary">
             </form>
             <div class="d-flex mb-5 align-items-center">
-              <span class="ml-auto"><a href="<?php echo base_url('Profil/signin'); ?>" class="forgot-pass">Pas encore inscrit ? Créez un compte !</a></span>
+              <span class="ml-auto"><a href="<?php echo base_url('profil/signin'); ?>" class="forgot-pass">Pas encore inscrit ? Créez un compte !</a></span>
             </div>
           </div>
         </div>

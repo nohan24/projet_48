@@ -44,7 +44,7 @@
               <input type="submit" value="S'inscrire" class="btn btn-block btn-primary" />
             </form>
             <div class="d-flex mb-5 align-items-center">
-              <span class="ml-auto"><a href="<?php echo base_url('Profil'); ?>" class="forgot-pass">Déjà inscrit ? Connectez-vous ici !</a></span>
+              <span class="ml-auto"><a href="<?php echo base_url('profil'); ?>" class="forgot-pass">Déjà inscrit ? Connectez-vous ici !</a></span>
             </div>
           </div>
 

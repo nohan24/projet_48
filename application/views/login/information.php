@@ -32,11 +32,11 @@
                                 <h6>Votre genre:</h6>
                                 <div class="d-block my-3">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="homme" class="custom-control-input" name="gender" value = "0" required />
+                                        <input type="radio" id="homme" class="custom-control-input" name="gender" value="0" required />
                                         <label for="homme" class="custom-control-label">Homme</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="femme" class="custom-control-input" name="gender" value = "1" required />
+                                        <input type="radio" id="femme" class="custom-control-input" name="gender" value="1" required />
                                         <label for="femme" class="custom-control-label">Femme</label>
                                     </div>
                                 </div>
@@ -53,32 +53,29 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="taille">Objectif</label>
-                                <input type="number" min="-50" id="objectif" name="objectif" placeholder="ex: -50 ou 50" class="form-control w-100 d-block" />
+                                <input type="number" min="-100" id="objectif" name="objectif" placeholder="ex: 50Kg ou -50Kg" class="form-control w-100 d-block" />
                             </div>
                             <div class="form-group mb-3">
-                            <div class="form-group">
-                                <div>
-                                    <label for="radio1">Conditions de santé spéciales :</label>
-                                </div>
-                                <?php for($i = 0; $i < count($param); $i++){ ?>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="restriction[]" id="radio1" value="<?php echo $param[$i]['parametre_id']; ?>">
-                                        <label class="form-check-label" for="radio1"><?php echo $param[$i]['param_name']; ?></label>
+                                <div class="form-group">
+                                    <div>
+                                        <label for="radio1">Conditions de santé spéciales :</label>
                                     </div>
-                                <?php } ?>
-                            </div>
-                            <input
-                            type="submit"
-                            value="S'inscrire"
-                            class="btn btn-block btn-primary"
-                            />
+                                    <?php for ($i = 0; $i < count($param); $i++) { ?>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="restriction[]" id="radio1" value="<?php echo $param[$i]['id']; ?>">
+                                            <label class="form-check-label" for="radio1"><?php echo $param[$i]['name']; ?></label>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                                <input type="submit" value="S'inscrire" class="btn btn-block btn-primary" />
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 </body>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+
 </html>
