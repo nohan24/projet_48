@@ -80,17 +80,23 @@ create view v_detail as (select d.*,unite_name from detail_activite d join unite
 
 -- front office
 
--- CREATE TABLE completion(
---     completion_id SERIAL PRIMARY KEY,
---     user_id INT,
---     gender INT NOT NULL,
---     dtn DATE,
---     objectif INT NOT NULL,
---     heigth DOUBLE PRECISION,
---     weigth DOUBLE PRECISION,
---     restriction INT,
---     FOREIGN KEY(restriction) REFERENCES restriction(restriction_id),
---     FOREIGN KEY(user_id) REFERENCES users(user_id)
--- );
+CREATE TABLE completion(
+    completion_id SERIAL PRIMARY KEY,
+    user_id INT,
+    gender INT NOT NULL,
+    dtn DATE,
+    objectif INT NOT NULL,
+    heigth DOUBLE PRECISION,
+    weigth DOUBLE PRECISION,
+    FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
 
+CREATE TABLE user_restriction(
+    id SERIAL PRIMARY KEY,
+    user_id INT,
+    parametre_id INT,
+    param_value INT,
+    FOREIGN KEY (parametre_id) REFERENCES parametre (id),
+    FOREIGN KEY(user_id) REFERENCES users(user_id)
 
+);

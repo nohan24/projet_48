@@ -86,7 +86,7 @@ class Suggestion_model extends CI_Model
     }
 
     var_dump($foodLists);
-    $result = array_keys($foodLists);
+    return ($result = array_keys($foodLists));
   }
 
 

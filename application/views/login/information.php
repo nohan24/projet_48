@@ -26,7 +26,7 @@
                         <form action="<?php echo base_url('Profil/completion'); ?>" method="post">
                             <div class="form-group mb-3">
                                 <label for="datenasissance">Date de naissance:</label>
-                                <input data-date-format="dd/mm/yyyy" type="date" name="datenasissance" id="datenasissance" class="form-control" />
+                                <input data-date-format="dd/mm/yyyy" type="date" name="dtn" id="datenasissance" class="form-control" />
                             </div>
                             <div class="form-group mb-3">
                                 <h6>Votre genre:</h6>
@@ -67,7 +67,7 @@
                                         </div>
                                     <?php } ?>
                                 </div>
-                                <input type="submit" value="S'inscrire" class="btn btn-block btn-primary" />
+                                <input type="submit" value="Valider l'inscription" class="btn btn-block btn-primary" />
                         </form>
                     </div>
                 </div>

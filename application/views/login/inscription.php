@@ -41,7 +41,7 @@
                 <label for="password">Mot de passe</label>
                 <input type="password" class="form-control" placeholder="Votre mot de passe" id="password" name="password" />
               </div>
-              <input type="submit" value="S'inscrire" class="btn btn-block btn-primary" />
+              <input type="submit" value="Finir la complétion de compte >>" class="btn btn-block btn-primary" />
             </form>
             <div class="d-flex mb-5 align-items-center">
               <span class="ml-auto"><a href="<?php echo base_url('profil'); ?>" class="forgot-pass">Déjà inscrit ? Connectez-vous ici !</a></span>
