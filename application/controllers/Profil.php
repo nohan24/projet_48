@@ -56,6 +56,7 @@ class Profil extends CI_Controller
     {
         $this->db->insert('users', $_SESSION['tmp_user']);
         $user = $this->Profils_model->get_last_user();
+        $_SESSION['user'] = $user;
         $restrictions = $this->input->post('restriction') == null ? [] : $this->input->post('restriction');
         $parametre = $this->Profils_model->get_parametre_id();
         $data = array(

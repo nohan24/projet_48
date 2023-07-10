@@ -12,6 +12,8 @@ class Admin_model extends CI_Model
         }
     }
 
+
+
     public function getUnite()
     {
         $this->db->select("*");
@@ -74,6 +76,7 @@ class Admin_model extends CI_Model
             return $this->db->get()->row_array();
         }
     }
+
 
     public function insertParam($data)
     {

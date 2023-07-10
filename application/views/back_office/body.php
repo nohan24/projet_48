@@ -49,7 +49,7 @@
                             <a href="#"><i class="fa-regular fa-circle"></i> Liste des régimes</a>
                         </li>
                         <li class="item">
-                            <a href="#"><i class="fa-regular fa-circle"></i> Plat</a>
+                            <a href="<?= site_url("admin/regime/plat"); ?>"><i class="fa-regular fa-circle"></i> Plat</a>
                         </li>
 
                     </ul>

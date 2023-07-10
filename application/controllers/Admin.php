@@ -25,6 +25,13 @@ class Admin extends CI_Controller
             $data['content'] = "back_office/ajout_regime";
             $this->load->view("back_office/body", $data);
         }
+
+        if ($route == "plat") {
+            $data["title"] = "Plat.";
+            $data["param"] = $this->Admin_model->getParametre();
+            $data['content'] = "back_office/plat";
+            $this->load->view("back_office/body", $data);
+        }
     }
 
     public function activite($route, $id = null)

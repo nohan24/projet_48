@@ -32,11 +32,19 @@ CREATE TABLE detail_activite(
     FOREIGN KEY(unite_activite_id) REFERENCES unite_activite(unite_activite_id)
 );
 
+CREATE TABLE activite_non_dispo(id SERIAL PRIMARY KEY, activite_id INT,  FOREIGN KEY(activite_id) REFERENCES activite(activite_id));
+
+CREATE VIEW v_activie_dispo AS SELECT * FROM activite WHERE activite_id NOT IN (select activite_id from activite_non_dispo);
+
     CREATE TABLE Diet(
         id INT AUTO_INCREMENT PRIMARY KEY, --semaine(s)
         duration DOUBLE PRECISION NOT NULL,
         objectif INT NOT NULL -- 1 -1
     );
+
+    CREATE TABLE diet_non_dispo(id SERIAL PRIMARY KEY, diet_id INT, FOREIGN KEY(diet_id) REFERENCES diet(id));
+
+    CREATE VIEW v_diet_dispo AS SELECT * FROM diet WHERE id NOT IN (select diet_id from diet_non_dispo);
 
     INSERT INTO Diet(duration , objectif) VALUES( 2 , 1 ) , ( 4 , 1 ) , ( 6 , -1 );
 
@@ -67,6 +75,7 @@ CREATE TABLE detail_activite(
     );
 
     INSERT INTO Restriction VALUES ( 5 , 4 ) , ( 2 , 1 ) ;
+
     ALTER TABLE ListFood
 ADD CONSTRAINT fk_diet FOREIGN KEY (diet_id) REFERENCES Diet (id),
 ADD CONSTRAINT fk_food FOREIGN KEY (food_id) REFERENCES Food (id);
@@ -98,5 +107,4 @@ CREATE TABLE user_restriction(
     param_value INT,
     FOREIGN KEY (parametre_id) REFERENCES parametre (id),
     FOREIGN KEY(user_id) REFERENCES users(user_id)
-
 );
