@@ -1,17 +1,14 @@
 CREATE TABLE users(
     user_id SERIAL PRIMARY KEY,
     user_name VARCHAR(80) NOT NULL,
+    email VARCHAR(60) NOT NULL,
     passwrd VARCHAR(30) NOT NULL,
     user_type INT NOT NULL
 );   
 
--- back office
+INSERT INTO users VALUES(default,"Administrateur","nutrivit-admin@gmail.com","projet48",1);
 
-CREATE TABLE detail_regime(
-    detail_regime_id SERIAL PRIMARY KEY,
-    parametre_id INT,
-    FOREIGN KEY(parametre_id) REFERENCES parametre(parametre_id)
-);
+-- back office
 
 CREATE TABLE unite_activite(
     unite_activite_id SERIAL PRIMARY KEY,
@@ -35,34 +32,65 @@ CREATE TABLE detail_activite(
     FOREIGN KEY(unite_activite_id) REFERENCES unite_activite(unite_activite_id)
 );
 
-CREATE TABLE regime(
-    regime_id SERIAL PRIMARY KEY,
-    type_regime INT,
-    gender INT,
-    weigth_per_week DOUBLE PRECISION,
-    price_per_week DOUBLE PRECISION,
-    detail_regime INT,
-    activite_id INT,
-    FOREIGN KEY(activite_id) REFERENCES activite(activite_id),
-    FOREIGN KEY(detail_regime) REFERENCES detail_regime(detail_regime_id)
-);
+    CREATE TABLE Diet(
+        id INT AUTO_INCREMENT PRIMARY KEY, --semaine(s)
+        duration DOUBLE PRECISION NOT NULL,
+        objectif INT NOT NULL -- 1 -1
+    );
 
+    INSERT INTO Diet(duration , objectif) VALUES( 2 , 1 ) , ( 4 , 1 ) , ( 6 , -1 );
+
+    CREATE TABLE Food(
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50) NOT NULL
+    );
+
+    INSERT INTO Food(name) VALUES ('Akoho') , ('Coca') , ('Ronono') , ('Rano') , ('Omby');
+
+    CREATE TABLE Parametre(
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50) NOT NULL
+    );
+
+    INSERT INTO Parametre(name) VALUES ( 'Diabete' ) , ( 'Tensionnaire' ) , ('No gluten') , ('goutte');
+
+    CREATE TABLE ListFood(
+        diet_id INT NOT NULL, -- FK
+        food_id INT NOT NULL -- FK
+    );
+
+    INSERT INTO ListFood VALUES ( 1 , 1 ) , ( 1 , 2 ) , ( 1 , 3 ) , ( 2 , 4 ) , ( 2 , 2 ) , ( 3 , 3 ) , ( 3 , 5 );
+
+    CREATE TABLE Restriction(
+        food_id INT NOT NULL, -- FK
+        parameter_id INT NOT NULL -- FK
+    );
+
+    INSERT INTO Restriction VALUES ( 5 , 4 ) , ( 2 , 1 ) ;
+    ALTER TABLE ListFood
+ADD CONSTRAINT fk_diet FOREIGN KEY (diet_id) REFERENCES Diet (id),
+ADD CONSTRAINT fk_food FOREIGN KEY (food_id) REFERENCES Food (id);
+
+ALTER TABLE Restriction
+ADD CONSTRAINT fk_food_restriction FOREIGN KEY (food_id) REFERENCES Food (id),
+ADD CONSTRAINT fk_parameter FOREIGN KEY (parameter_id) REFERENCES Parametre (id);
+
+
+create view v_detail as (select d.*,unite_name from detail_activite d join unite_activite u on d.unite_activite_id=u.unite_activite_id);
 
 -- front office
 
-CREATE TABLE restriction(
-    restriction_id SERIAL PRIMARY KEY,
-    user_id INT,
-    parametre_id INT,
-    FOREIGN KEY(parametre_id) REFERENCES parametre(parametre_id),
-    FOREIGN KEY(user_id) REFERENCES users(user_id)
-);
+-- CREATE TABLE completion(
+--     completion_id SERIAL PRIMARY KEY,
+--     user_id INT,
+--     gender INT NOT NULL,
+--     dtn DATE,
+--     objectif INT NOT NULL,
+--     heigth DOUBLE PRECISION,
+--     weigth DOUBLE PRECISION,
+--     restriction INT,
+--     FOREIGN KEY(restriction) REFERENCES restriction(restriction_id),
+--     FOREIGN KEY(user_id) REFERENCES users(user_id)
+-- );
 
-CREATE TABLE completion(
-    completion_id SERIAL PRIMARY KEY,
-    gender INT NOT NULL,
-    objectif INT NOT NULL,
-    heigth DOUBLE PRECISION,
-    weigth DOUBLE PRECISION,
-    restriction INT
-);
+
