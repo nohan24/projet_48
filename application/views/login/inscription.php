@@ -30,16 +30,16 @@
               <div class="d-flex align-items-center">
                 <div class="form-group w-100">
                   <label for="nom">Nom d'utilisateur:</label>
-                  <input type="text" class="form-control" placeholder="Votre nom d'utilisateur" id="nom" name="username" />
+                  <input type="text" class="form-control" placeholder="Votre nom d'utilisateur" id="nom" name="username" required/>
                 </div>
               </div>
               <div class="form-group mb-3">
                 <label for="password">Votre adresse e-mail:</label>
-                <input type="email" class="form-control w-100" placeholder="votre-email@example.com" id="email" name="email" />
+                <input type="email" class="form-control w-100" placeholder="votre-email@example.com" id="email" name="email" required/>
               </div>
               <div class="form-group last mb-3">
                 <label for="password">Mot de passe</label>
-                <input type="password" class="form-control" placeholder="Votre mot de passe" id="password" name="password" />
+                <input type="password" class="form-control" placeholder="Votre mot de passe" id="password" name="password" required/>
               </div>
               <input type="submit" value="Finir la complétion de compte >>" class="btn btn-block btn-primary" />
             </form>
