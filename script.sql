@@ -131,12 +131,10 @@ CREATE TABLE usedCode(
     FOREIGN KEY(code_id) REFERENCES code(id)
 );
 
-CREATE TABLE usableCode(
+CREATE TABLE codeRequest(
     code_id INT ,
-    FOREIGN KEY(code_id) REFERENCES code(id)
-);
-
-CREATE TABLE requestedCode(
-    code_id INT ,
-    FOREIGN KEY(code_id) REFERENCES code(id)
+    user_id INT ,
+    state INT NOT NULL,
+    FOREIGN KEY(code_id) REFERENCES code(id),
+    FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
