@@ -52,8 +52,12 @@
                                 </div>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="taille">Objectif</label>
-                                <input type="number" min="-100" id="objectif" name="objectif" placeholder="ex: 50Kg ou -50Kg" class="form-control w-100 d-block" />
+                                <label for="objectif">Objectif</label>
+                                <select name="objectif" id="objectif" class="form-control w-100 d-block">
+                                    <?php for($i = 0; $i < count($objectif); $i++){ ?>
+                                        <option value="<?php echo $objectif[$i]['idObjectif']; ?>"><?php echo $objectif[$i]['nomObjectif']; ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                             <div class="form-group mb-3">
                                 <div class="form-group">

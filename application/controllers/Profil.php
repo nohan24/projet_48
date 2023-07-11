@@ -47,6 +47,7 @@ class Profil extends CI_Controller
         );
         $_SESSION['tmp_user'] = $data;
         $data = array();
+        $data['objectif'] = $this->Profils_model->get_objectifs();
         $data['param'] = $this->Profils_model->get_parametre();
         $this->load->view('login/information', $data);
     }
