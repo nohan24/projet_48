@@ -20,4 +20,13 @@ class Regimes_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function get_regime($id_regime)
+    {
+        $this->db->select('*');
+        $this->db->from('diet');
+        $this->db->where('id', $id_regime);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

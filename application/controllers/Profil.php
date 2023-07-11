@@ -8,6 +8,8 @@ class Profil extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Profils_model');
+        $this->load->model('Suggestion_model');
+        $this->load->model('Regimes_model');
     }
 
     public function index()
@@ -31,12 +33,24 @@ class Profil extends CI_Controller
                 redirect(site_url("admin"));
             } else {
                 $_SESSION['user'] = $user[0]['user_id'];
-                redirect(site_url("admin"));
+                redirect(base_url("profil/suggestion"));
             }
         } else {
-            redirect('login');
+            redirect('profil/index');
         }
     }
+
+    public function suggestion(){
+        $user_id = $_SESSION['user'];
+        $suggestion = $this->Suggestion_model->getSuggestion($user_id);
+        $regime = array();
+        for($i = 0; $i < count($suggestion); $i++){
+            $regime = $this->Regimes_model->get_regime($suggestion[$i]);
+        }
+        $data = array();
+        $data['regime'] = $regime;
+        $this->load->view('login/suggestion', $data);
+    } 
 
     public function inscription()
     {
@@ -47,6 +61,7 @@ class Profil extends CI_Controller
         );
         $_SESSION['tmp_user'] = $data;
         $data = array();
+        $data['objectif'] = $this->Profils_model->get_objectifs();
         $data['param'] = $this->Profils_model->get_parametre();
         $this->load->view('login/information', $data);
     }
@@ -91,6 +106,12 @@ class Profil extends CI_Controller
         }
         redirect(site_url('profil'));
     }
+
+    function calculerIMC($poids, $taille) {
+        $tailleEnMetres = $taille / 100; 
+        $imc = $poids / ($tailleEnMetres * $tailleEnMetres);
+        return $imc;
+    }    
 
     public function logout()
     {

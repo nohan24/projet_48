@@ -48,12 +48,16 @@
                                 </div>
                                 <div class="col-md-5 mb-3">
                                     <label for="taille">Taille</label>
-                                    <input type="number" step="10" min="150" id="taille" name="taille" placeholder="ex: 170 cm" class="form-control w-100 d-block" />
+                                    <input type="number" min="140" id="taille" name="taille" placeholder="ex: 170 cm" class="form-control w-100 d-block" />
                                 </div>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="taille">Objectif</label>
-                                <input type="number" min="-100" id="objectif" name="objectif" placeholder="ex: 50Kg ou -50Kg" class="form-control w-100 d-block" />
+                                <label for="objectif">Objectif</label>
+                                <select name="objectif" id="objectif" class="form-control w-100 d-block">
+                                    <?php for($i = 0; $i < count($objectif); $i++){ ?>
+                                        <option value="<?php echo $objectif[$i]['idObjectif']; ?>"><?php echo $objectif[$i]['nomObjectif']; ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                             <div class="form-group mb-3">
                                 <div class="form-group">

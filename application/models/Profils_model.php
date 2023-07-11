@@ -38,4 +38,22 @@ class Profils_model extends CI_Model
 
         return $row['user_id'];
     }
+
+    public function get_objectifs()
+    {
+        $this->db->select('*');
+        $this->db->from('objectif');
+        $query = $this->db->get();
+        return $query -> result_array();
+    }
+
+    function calculerIMC($poids, $taille) {
+        $tailleEnMetres = $taille / 100; // Convertir la taille en mètres
+        
+        // Calcul de l'IMC
+        $imc = $poids / ($tailleEnMetres * $tailleEnMetres);
+        
+        return $imc;
+    }
+    
 }

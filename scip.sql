@@ -65,10 +65,6 @@ CREATE TABLE Diet(
     CREATE TABLE food_non_dispo(food_id INT);
 
     CREATE VIEW v_food_dispo AS SELECT * FROM food WHERE id NOT IN (select food_id FROM food_non_dispo);
-
-    INSERT INTO Food(name) VALUES ('Akoho') , ('Coca') , ('Ronono') , ('Rano') , ('Omby');
-
-    CREATE VIEW v_food_dispo AS SELECT * FROM food WHERE id NOT IN (select food_id FROM food_non_dispo);
    
     CREATE TABLE Parametre(
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -97,8 +93,8 @@ CREATE TABLE Diet(
 
 
     CREATE TABLE Restriction(
-        food_id INT NOT NULL, 
-        parameter_id INT NOT NULL 
+        food_id INT NOT NULL, -- FK
+        parameter_id INT NOT NULL -- FK
     );
 
     INSERT INTO Restriction VALUES ( 5 , 4 ) , ( 2 , 1 ) ;
@@ -137,29 +133,3 @@ CREATE TABLE user_restriction(
 );
 
 -- suite sql
-
-CREATE TABLE objectif(
-    idObjectif INT PRIMARY KEY,
-    nomObjectif VARCHAR(128)
-);
-
-INSERT objectif VALUES(-1, 'Perdre du poids'), (1, 'Augmenter du poids'), (0, 'Atteindre son IMC ideal');
-
-CREATE TABLE usableCode(
-    code_id INT ,
-    FOREIGN KEY(code_id) REFERENCES code(id)
-);
-
-CREATE TABLE requestedCode(
-    code_id INT ,
-    FOREIGN KEY(code_id) REFERENCES code(id)
-);
-
-CREATE OR REPLACE VIEW v_diet AS
-    SELECT v_diet_dispo.id, objectif.nomObjectif, food.name, v_diet_dispo.duration FROM v_diet_dispo 
-        JOIN objectif 
-        ON v_diet_dispo.objectif = objectif.idObjectif
-        JOIN listfood 
-        ON diet_id = v_diet_dispo.id 
-        JOIN food 
-        ON food_id = food.id;

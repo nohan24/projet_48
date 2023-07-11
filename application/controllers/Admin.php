@@ -21,6 +21,8 @@ class Admin extends CI_Controller
     public function regime($route)
     {
         if ($route == "ajout") {
+            $data['activite'] = $this->Admin_model->getActivite();
+            $data["plat"] = $this->Admin_model->getPlat();
             $data['title'] = "Ajout d'un régime.";
             $data['content'] = "back_office/ajout_regime";
             $this->load->view("back_office/body", $data);
@@ -29,16 +31,41 @@ class Admin extends CI_Controller
         if ($route == "plat") {
             $data["title"] = "Plat.";
             $data["param"] = $this->Admin_model->getParametre();
+            $data["plat"] = $this->Admin_model->getPlat();
             $data['content'] = "back_office/plat";
             $this->load->view("back_office/body", $data);
         }
+
+        if ($route == "liste") {
+            $data['title'] = "Liste des régimes.";
+            $data['regime'] = $this->Admin_model->getRegime();
+            $data['content'] = "back_office/regime_liste";
+            $this->load->view("back_office/body", $data);
+        }
+    }
+
+    public function deleteDiet($id)
+    {
+        $this->Admin_model->deleteRegime($id);
+        redirect(site_url("admin/regime/liste"));
+    }
+
+    public function ajoutRegime()
+    {
+        $this->Admin_model->addRegime($_POST);
+        redirect(site_url("admin/regime/ajout"));
+    }
+
+    public function supprimerPlat($id)
+    {
+        $this->Admin_model->deleteFood($id);
+        redirect(site_url("admin/regime/plat"));
     }
 
     public function insertPlat()
     {
         $this->Admin_model->addPlat($_POST);
-        var_dump($_POST);
-        // redirect(site_url("admin/regime/plat"));
+        redirect(site_url("admin/regime/plat"));
     }
 
     public function activite($route, $id = null)
