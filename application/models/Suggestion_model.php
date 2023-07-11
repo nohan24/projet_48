@@ -47,19 +47,39 @@ class Suggestion_model extends CI_Model
     return $hashMap;
   }
 
-  public function getSuggestion($non)
+  public function getSuggestion($user_id)
   {
-    $foodListQuery = $this->db->get('listfood');
+    $non = array();
+    $this->db->select('*');
+    $this->db->from('completion');
+    $this->db->where('user_id', $user_id);
+    $valiny = $this->db->get()->row_array();
+
+
+    if ($valiny['objectif'] < 0) {
+      $query = $this->db->query("SELECT * FROM listfood WHERE diet_id IN (select id from diet where objectif = -1 and gender = " . $valiny['gender'] . ")");
+      $res = $query->result();
+    } else {
+      $query = $this->db->query("SELECT * FROM listfood WHERE diet_id IN (select id from diet where objectif = 1 and gender = " . $valiny['gender'] . ")");
+      $res = $query->result();
+    }
+
     $restrictionQuery = $this->db->get('restriction');
 
-    $foodListFromDb = $foodListQuery->result();
+    $this->db->select("parametre_id");
+    $this->db->from("user_restriction");
+    $this->db->where("user_id", $user_id);
+    $result = $this->db->get()->result_array();
+    foreach ($result as $r) {
+      array_push($non, $r['parametre_id']);
+    }
+
+    $foodListFromDb = $res;
     $restrictionFromDb = $restrictionQuery->result();
 
-    $foodLists = $this->transformToHashMapG($foodListFromDb);
     $restrictions = $this->transformToHashMapG($restrictionFromDb);
+    $foodLists = $this->transformToHashMapG($foodListFromDb);
 
-    var_dump($foodLists);
-    var_dump($restrictions);
 
     $found = false;
 
@@ -85,7 +105,6 @@ class Suggestion_model extends CI_Model
       }
     }
 
-    var_dump($foodLists);
     return ($result = array_keys($foodLists));
   }
 

@@ -40,7 +40,7 @@
                 foreach ($plat as $p) { ?>
                     <tr class="text-center">
                         <th><?= $p['name'] ?></th>
-                        <td class="d-flex justify-content-center gap-2"> <a href="#" class="btn-4 link"><i class="fa-solid fa-pen" style="color:white; font-size:14px;"></i></a> <a href="<?= site_url("admin/supprimerPlat/" . $p['id']); ?>" class="btn-2 link"><i class="fa-solid fa-trash" style="color:white; font-size:14px;"></i></a></td>
+                        <td class="d-flex justify-content-center gap-2"></a> <a href="<?= site_url("admin/supprimerPlat/" . $p['id']); ?>" class="btn-2 link"><i class="fa-solid fa-trash" style="color:white; font-size:14px;"></i></a></td>
                     </tr>
                 <?php }
                 ?>

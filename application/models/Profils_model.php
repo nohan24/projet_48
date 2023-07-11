@@ -16,7 +16,7 @@ class Profils_model extends CI_Model
     public function get_parametre()
     {
         $this->db->select('*');
-        $this->db->from('parametre');
+        $this->db->from('v_parametre');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -24,7 +24,7 @@ class Profils_model extends CI_Model
     public function get_parametre_id()
     {
         $this->db->select('id');
-        $this->db->from('parametre');
+        $this->db->from('v_parametre');
         $query = $this->db->get();
         return $query->result_array();
     }

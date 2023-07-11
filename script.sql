@@ -41,13 +41,16 @@ CREATE TABLE activite_non_dispo(id SERIAL PRIMARY KEY, activite_id INT,  FOREIGN
 CREATE VIEW v_activie_dispo AS SELECT * FROM activite WHERE activite_id NOT IN (select activite_id from activite_non_dispo);
 
 CREATE TABLE Diet(
-    id INT AUTO_INCREMENT PRIMARY KEY, 
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(80),
+    gender INT,
     duration DOUBLE PRECISION NOT NULL,
     objectif INT NOT NULL,
     prix DOUBLE PRECISION, 
     pour_viande DOUBLE PRECISION,
     pour_poisson DOUBLE PRECISION,
-    pour_volaille DOUBLE PRECISION
+    pour_volaille DOUBLE PRECISION,
+    path_img VARCHAR(255) default 'default-img.jpg'
 );
 
     CREATE TABLE diet_non_dispo(id SERIAL PRIMARY KEY, diet_id INT, FOREIGN KEY(diet_id) REFERENCES diet(id));
@@ -62,7 +65,6 @@ CREATE TABLE Diet(
     CREATE TABLE food_non_dispo(food_id INT);
 
     CREATE VIEW v_food_dispo AS SELECT * FROM food WHERE id NOT IN (select food_id FROM food_non_dispo);
-
    
     CREATE TABLE Parametre(
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -76,15 +78,23 @@ CREATE TABLE Diet(
     INSERT INTO Parametre(name) VALUES ( 'Diabete' ) , ( 'Tensionnaire' ) , ('No gluten') , ('goutte');
 
     CREATE TABLE ListFood(
-        diet_id INT NOT NULL, -- FK
-        food_id INT NOT NULL -- FK
+        diet_id INT NOT NULL, 
+        food_id INT NOT NULL,
+        FOREIGN KEY(diet_id) REFERENCES diet(id),
+        FOREIGN KEY(food_id) REFERENCES food(id)
     );
 
-    INSERT INTO ListFood VALUES ( 1 , 1 ) , ( 1 , 2 ) , ( 1 , 3 ) , ( 2 , 4 ) , ( 2 , 2 ) , ( 3 , 3 ) , ( 3 , 5 );
+    CREATE TABLE listActivite(
+        diet_id INT NOT NULL,
+        activite_id INT NOT NULL,
+        FOREIGN KEY(diet_id) REFERENCES diet(id),
+        FOREIGN KEY(activite_id) REFERENCES activite(activite_id)
+    );
+
 
     CREATE TABLE Restriction(
-        food_id INT NOT NULL, -- FK
-        parameter_id INT NOT NULL -- FK
+        food_id INT NOT NULL, 
+        parameter_id INT NOT NULL 
     );
 
     INSERT INTO Restriction VALUES ( 5 , 4 ) , ( 2 , 1 ) ;

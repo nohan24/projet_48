@@ -46,7 +46,7 @@
                             <a href="<?php echo site_url("admin/regime/ajout"); ?>"><i class="fa-regular fa-circle"></i> Ajout d'un régime</a>
                         </li>
                         <li class="item">
-                            <a href="#"><i class="fa-regular fa-circle"></i> Liste des régimes</a>
+                            <a href="<?= site_url("admin/regime/liste") ?>"><i class="fa-regular fa-circle"></i> Liste des régimes</a>
                         </li>
                         <li class="item">
                             <a href="<?= site_url("admin/regime/plat"); ?>"><i class="fa-regular fa-circle"></i> Plat</a>

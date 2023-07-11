@@ -6,7 +6,12 @@ class Regime extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Regimes_model');
+        $this->load->model('Suggestion_model');
+    }
+
+    public function index()
+    {
+        var_dump($this->Suggestion_model->getSuggestion(10));
     }
 
     public function suggestion($id_user)
