@@ -133,3 +133,25 @@ CREATE TABLE user_restriction(
 );
 
 -- suite sql
+
+CREATE TABLE code(code_id INT(4) PRIMARY KEY, value DOUBLE PRECISION);
+
+
+CREATE TABLE usedCode(code_id INT);
+
+CREATE TABLE requestedCode(code_id INT, user_id INT);
+
+INSERT INTO requestedCode VALUES(1234, 10);
+
+CREATE TABLE vola(user_id INT, montant DOUBLE PRECISION default 0);
+
+CREATE VIEW v_request AS SELECT r.*,u.email,c.value FROM requestedCode r JOIN users u ON r.user_id = u.user_id JOIN code c on r.code_id=c.code_id;
+
+CREATE TABLE historique_achat(
+    id SERIAL PRIMARY KEY,
+    user_id INT,
+    diet_id INT,
+    date_achat DATE
+);
+
+INSERT INTO code VALUES(1234,1000),(3455,5000),(2345,5600);

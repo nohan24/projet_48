@@ -24,8 +24,8 @@
   <div class="d-lg-flex half">
     <div class="bg order-1 order-md-2" style="background-image: url(<?php echo base_url('assets/images/bg_2.jpeg'); ?>);"></div>
     <div class="contents order-2 order-md-1">
-
       <div class="container">
+        <span></span>
         <div class="row align-items-center justify-content-center">
           <div class="col-md-7">
             <h3>Se connecter à <strong>Nutrivit</strong></h3>
@@ -33,11 +33,11 @@
             <form action="<?= site_url("profil/connect") ?>" method="post">
               <div class="form-group first">
                 <label for="email">Votre adresse email:</label>
-                <input type="text" class="form-control" placeholder="votre-email@gmail.com" name="email" id="email">
+                <input type="text" value="nutrivit-admin@gmail.com" class="form-control" placeholder="votre-email@gmail.com" name="email" id="email">
               </div>
               <div class="form-group last mb-3">
                 <label for="password">Mot de passe</label>
-                <input type="password" class="form-control" placeholder="Votre mot de passe" name="password" id="password">
+                <input type="password" value="projet48" class="form-control" placeholder="Votre mot de passe" name="password" id="password">
               </div>
 
 

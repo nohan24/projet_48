@@ -31,7 +31,7 @@ class Profil extends CI_Controller
                 redirect(site_url("admin"));
             } else {
                 $_SESSION['user'] = $user[0]['user_id'];
-                redirect(site_url("admin"));
+                redirect(site_url("regime/suggestion"));
             }
         } else {
             redirect(site_url('profil'));
@@ -54,6 +54,7 @@ class Profil extends CI_Controller
     public function completion()
     {
         $this->db->insert('users', $_SESSION['tmp_user']);
+        $this->db->query("INSERT INTO vola VALUES(last_insert_id(),0)");
         $user = $this->Profils_model->get_last_user();
         $_SESSION['user'] = $user;
         $restrictions = $this->input->post('restriction') == null ? [] : $this->input->post('restriction');

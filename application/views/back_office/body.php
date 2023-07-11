@@ -28,7 +28,7 @@
                             <i class="fa-solid fa-chevron-left"></i>Tableau de bord
                         </div>
                         <li class="item">
-                            <a href="#>"><i class="fa-regular fa-circle"></i> Statistique</a>
+                            <a href="<?= site_url("admin") ?>"><i class="fa-regular fa-circle"></i> Statistique</a>
                         </li>
                     </ul>
                 </li>
@@ -87,7 +87,7 @@
                             Code monnaie
                         </div>
                         <li class="item">
-                            <a href="#"><i class="fa-regular fa-circle"></i>Validation</a>
+                            <a href="<?= site_url("admin/code") ?>"><i class="fa-regular fa-circle"></i>Validation</a>
                         </li>
                     </ul>
                 <li class="item">

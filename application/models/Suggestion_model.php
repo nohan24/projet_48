@@ -47,6 +47,16 @@ class Suggestion_model extends CI_Model
     return $hashMap;
   }
 
+  public function getDetail($user, $regime)
+  {
+    $sql = "SELECT * FROM completion where user_id = $user";
+    $q = $this->db->query($sql)->row_array();
+    $d = $this->db->query("SELECT * FROM v_diet_dispo where id = $regime")->row_array();
+    $duree = abs($q['objectif'] / $d['duration']);
+    $prix = $d['prix'] * $duree;
+    return [$duree, $prix];
+  }
+
   public function getSuggestion($user_id)
   {
     $non = array();

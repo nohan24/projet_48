@@ -14,8 +14,9 @@ class Admin extends CI_Controller
     public function index()
     {
         $data['title'] = "Tableau de bord";
-        // $this->load->view("back_office/body", $data);
-        echo "board";
+        $data['diet'] = $this->Admin_model->getRegime();
+        $data['content'] = "back_office/statistique";
+        $this->load->view("back_office/body", $data);
     }
 
     public function regime($route)
@@ -137,5 +138,42 @@ class Admin extends CI_Controller
     {
         $this->Admin_model->updateParam($_POST);
         redirect(site_url("admin/parametre"));
+    }
+
+    public function code()
+    {
+        $data['title'] = "Demande de validation.";
+        $data['demande'] = $this->Admin_model->getDemande();
+        $data['content'] = "back_office/monnaie";
+        $this->load->view("back_office/body", $data);
+    }
+
+    public function acceptCode($code, $user, $montant)
+    {
+        $this->db->query("INSERT INTO usedCode VALUES($code)");
+        $this->db->query("DELETE FROM requestedCode WHERE code_id = $code and user_id = $user");
+        $this->db->query("UPDATE vola SET montant = montant + $montant WHERE user_id = $user");
+        redirect(site_url("admin/code"));
+    }
+
+    public function declineCode($code, $user)
+    {
+        $this->db->query("DELETE FROM requestedCode WHERE code_id = $code and user_id = $user");
+        redirect(site_url("admin/code"));
+    }
+
+    public function getData($diet)
+    {
+        $result = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $sql = "SELECT coalesce(COUNT(diet_id),0) as qtt FROM historique_achat WHERE diet_id = $diet and EXTRACT(YEAR FROM date_achat)= extract(year from now()) and EXTRACT(MONTH FROM date_achat) = $i group by diet_id";
+            $query = $this->db->query($sql);
+            if ($query->row_array()['qtt'] == null) {
+                array_push($result, 0);
+            } else {
+                array_push($result, doubleval($query->row_array()['qtt']));
+            }
+        }
+        echo json_encode($result);
     }
 }

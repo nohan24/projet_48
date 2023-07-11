@@ -128,6 +128,13 @@ class Admin_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function getDemande()
+    {
+        $this->db->select("*");
+        $this->db->from("v_request");
+        return $this->db->get()->result_array();
+    }
+
     public function addRegime($data)
     {
         $target_dir = "assets/images/regime/";
