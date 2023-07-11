@@ -26,5 +26,7 @@
 
     <div class="card">
         <h4>Liste des plats</h4>
+        <?php
+        var_dump($plat); ?>
     </div>
 </div>

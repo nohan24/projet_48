@@ -29,6 +29,7 @@ class Admin extends CI_Controller
         if ($route == "plat") {
             $data["title"] = "Plat.";
             $data["param"] = $this->Admin_model->getParametre();
+            $data["plat"] = $this->Admin_model->getPlat();
             $data['content'] = "back_office/plat";
             $this->load->view("back_office/body", $data);
         }

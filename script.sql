@@ -41,9 +41,9 @@ CREATE TABLE activite_non_dispo(id SERIAL PRIMARY KEY, activite_id INT,  FOREIGN
 CREATE VIEW v_activie_dispo AS SELECT * FROM activite WHERE activite_id NOT IN (select activite_id from activite_non_dispo);
 
     CREATE TABLE Diet(
-        id INT AUTO_INCREMENT PRIMARY KEY, --semaine(s)
+        id INT AUTO_INCREMENT PRIMARY KEY,
         duration DOUBLE PRECISION NOT NULL,
-        objectif INT NOT NULL -- 1 -1
+        objectif INT NOT NULL
     );
 
     CREATE TABLE diet_non_dispo(id SERIAL PRIMARY KEY, diet_id INT, FOREIGN KEY(diet_id) REFERENCES diet(id));
@@ -56,6 +56,10 @@ CREATE VIEW v_activie_dispo AS SELECT * FROM activite WHERE activite_id NOT IN (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50) NOT NULL
     );
+
+    CREATE TABLE food_non_dispo(food_id INT);
+
+    CREATE VIEW v_food_dispo AS SELECT * FROM food WHERE id NOT IN (select food_id FROM food_non_dispo);
 
     INSERT INTO Food(name) VALUES ('Akoho') , ('Coca') , ('Ronono') , ('Rano') , ('Omby');
 
@@ -92,7 +96,6 @@ ALTER TABLE Restriction
 ADD CONSTRAINT fk_food_restriction FOREIGN KEY (food_id) REFERENCES Food (id),
 ADD CONSTRAINT fk_parameter FOREIGN KEY (parameter_id) REFERENCES Parametre (id);
 
-
 create view v_detail as (select d.*,unite_name from detail_activite d join unite_activite u on d.unite_activite_id=u.unite_activite_id);
 
 -- front office
@@ -117,4 +120,23 @@ CREATE TABLE user_restriction(
     FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
--- suite sql
+CREATE TABLE code(
+    id SERIAL PRIMARY KEY,
+    code INT NOT NULL,
+    valeur DOUBLE PRECISION NOT NULL
+);
+
+CREATE TABLE usedCode(
+    code_id INT ,
+    FOREIGN KEY(code_id) REFERENCES code(id)
+);
+
+CREATE TABLE usableCode(
+    code_id INT ,
+    FOREIGN KEY(code_id) REFERENCES code(id)
+);
+
+CREATE TABLE requestedCode(
+    code_id INT ,
+    FOREIGN KEY(code_id) REFERENCES code(id)
+);
