@@ -47,7 +47,7 @@ class Suggestion_model extends CI_Model
     return $hashMap;
   }
 
-  public function getSuggestion($non)
+  public function getSuggestion($non) // objectif , genre , liste zavatra tsy zaka 
   {
     $foodListQuery = $this->db->get('listfood');
     $restrictionQuery = $this->db->get('restriction');

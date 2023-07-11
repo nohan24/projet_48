@@ -25,8 +25,55 @@ class Code_model extends CI_Model {
     parent::__construct();
   }
 
-  function use($code) {
+  public function getSuggestion($non) // objectif , genre , liste zavatra tsy zaka 
+  {
+    $foodListQuery = $this->db->get('listfood');
+    $restrictionQuery = $this->db->get('restriction');
+
+    $foodListFromDb = $foodListQuery->result();
+    $restrictionFromDb = $restrictionQuery->result();
+
+    $foodLists = $this->transformToHashMapG($foodListFromDb);
+    $restrictions = $this->transformToHashMapG($restrictionFromDb);
+
+    var_dump($foodLists);
+    var_dump($restrictions);
+
+    $found = false;
+
+    foreach ($foodLists as $dietId => $foodList) {
+
+      $found = false;
+      foreach ($foodList as $k => $food) {
+        if (isset($restrictions[$food])) {
+
+          foreach ($non as $key => $no) {
+            if (in_array($no, $restrictions[$food])) {
+              echo ($dietId . '<br>');
+              unset($foodLists[$dietId]);
+              $found = true;
+              break;
+            }
+          }
+        }
+
+        if ($found === true) {
+          break;
+        }
+      }
+    }
+
+    var_dump($foodLists);
+    return ($result = array_keys($foodLists));
+  }
+
+  public function isIn($code , $usedList) {
     
+    if( in_array($code , $usedList) ){
+      return true;
+    }
+
+    return false;
   }
 
   // ------------------------------------------------------------------------

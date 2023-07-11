@@ -1,10 +1,9 @@
 CREATE TABLE code(
-    code_id SERIAL PRIMARY KEY,
-    code INT(4) NOT NULL,
+    code_id INT(4) NOT NULL PRIMARY KEY,
     value DOUBLE PRECISION NOT NULL
 );
 
-INSERT INTO code(code , value) VALUES (1000 , 1000) ,
+INSERT INTO code(code_id, value) VALUES (1000 , 1000) ,
 (1001 , 2000) , (1011 , 5000) ,  (1111 , 9000) ,
 (1201 , 10000) , (1979 , 67000) ,(2000 , 2000) , 
 (2075 , 28000) , (1999 , 73000) , (0541 , 33000) , 
