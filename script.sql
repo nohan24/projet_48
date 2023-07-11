@@ -40,25 +40,30 @@ CREATE TABLE activite_non_dispo(id SERIAL PRIMARY KEY, activite_id INT,  FOREIGN
 
 CREATE VIEW v_activie_dispo AS SELECT * FROM activite WHERE activite_id NOT IN (select activite_id from activite_non_dispo);
 
-    CREATE TABLE Diet(
-        id INT AUTO_INCREMENT PRIMARY KEY, --semaine(s)
-        duration DOUBLE PRECISION NOT NULL,
-        objectif INT NOT NULL -- 1 -1
-    );
+CREATE TABLE Diet(
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    duration DOUBLE PRECISION NOT NULL,
+    objectif INT NOT NULL,
+    prix DOUBLE PRECISION, 
+    pour_viande DOUBLE PRECISION,
+    pour_poisson DOUBLE PRECISION,
+    pour_volaille DOUBLE PRECISION
+);
 
     CREATE TABLE diet_non_dispo(id SERIAL PRIMARY KEY, diet_id INT, FOREIGN KEY(diet_id) REFERENCES diet(id));
 
     CREATE VIEW v_diet_dispo AS SELECT * FROM diet WHERE id NOT IN (select diet_id from diet_non_dispo);
-
-    INSERT INTO Diet(duration , objectif) VALUES( 2 , 1 ) , ( 4 , 1 ) , ( 6 , -1 );
 
     CREATE TABLE Food(
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50) NOT NULL
     );
 
-    INSERT INTO Food(name) VALUES ('Akoho') , ('Coca') , ('Ronono') , ('Rano') , ('Omby');
+    CREATE TABLE food_non_dispo(food_id INT);
 
+    CREATE VIEW v_food_dispo AS SELECT * FROM food WHERE id NOT IN (select food_id FROM food_non_dispo);
+
+   
     CREATE TABLE Parametre(
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50) NOT NULL

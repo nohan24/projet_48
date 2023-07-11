@@ -24,7 +24,27 @@
         </form>
     </div>
 
+
     <div class="card">
         <h4>Liste des plats</h4>
+        <table class="table table-borderless" id="filter">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">Nom de l'activité</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <div class="line"></div>
+            <tbody>
+                <?php
+                foreach ($plat as $p) { ?>
+                    <tr class="text-center">
+                        <th><?= $p['name'] ?></th>
+                        <td class="d-flex justify-content-center gap-2"> <a href="#" class="btn-4 link"><i class="fa-solid fa-pen" style="color:white; font-size:14px;"></i></a> <a href="<?= site_url("admin/supprimerPlat/" . $p['id']); ?>" class="btn-2 link"><i class="fa-solid fa-trash" style="color:white; font-size:14px;"></i></a></td>
+                    </tr>
+                <?php }
+                ?>
+            </tbody>
+        </table>
     </div>
 </div>

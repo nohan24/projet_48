@@ -29,16 +29,22 @@ class Admin extends CI_Controller
         if ($route == "plat") {
             $data["title"] = "Plat.";
             $data["param"] = $this->Admin_model->getParametre();
+            $data["plat"] = $this->Admin_model->getPlat();
             $data['content'] = "back_office/plat";
             $this->load->view("back_office/body", $data);
         }
     }
 
+    public function supprimerPlat($id)
+    {
+        $this->Admin_model->deleteFood($id);
+        redirect(site_url("admin/regime/plat"));
+    }
+
     public function insertPlat()
     {
         $this->Admin_model->addPlat($_POST);
-        var_dump($_POST);
-        // redirect(site_url("admin/regime/plat"));
+        redirect(site_url("admin/regime/plat"));
     }
 
     public function activite($route, $id = null)

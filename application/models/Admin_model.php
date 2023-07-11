@@ -75,7 +75,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function insertParam($data)
     {
         $sql = "INSERT INTO parametre VALUES(default,%s)";
@@ -102,6 +101,18 @@ class Admin_model extends CI_Model
         for ($i = 0; $i < count($restrictions); $i++) {
             $this->db->query("INSERT INTO restriction VALUES(last_insert_id(), " . $restrictions[$i] . ")");
         }
-        var_dump($restrictions);
+        redirect(site_url("admin/regime/plat"));
+    }
+
+    public function getPlat()
+    {
+        $this->db->select("*");
+        $this->db->from("v_food_dispo");
+        return $this->db->get()->result_array();
+    }
+
+    public function deleteFood($id)
+    {
+        $this->db->query("INSERT INTO food_non_dispo VALUES($id)");
     }
 }

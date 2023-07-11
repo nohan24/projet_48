@@ -34,7 +34,7 @@ class Profil extends CI_Controller
                 redirect(site_url("admin"));
             }
         } else {
-            redirect('login');
+            redirect(site_url('profil'));
         }
     }
 
