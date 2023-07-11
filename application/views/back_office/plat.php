@@ -2,7 +2,7 @@
     <h2 class="mb-3">Plat</h2>
     <div class="card mb-2">
         <h4 class="mb-3">Ajout d'un nouveau plat</h4>
-        <form action="#" method="post">
+        <form action="<?= site_url("admin/insertPlat") ?>" method="post">
             <div class="mb-3 d-flex flex-column">
                 <label class="mb-2" for="quantite">Nom du plat : </label>
                 <div class="d-flex align-items-end gap-1">

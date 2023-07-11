@@ -12,8 +12,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
-
     public function getUnite()
     {
         $this->db->select("*");
@@ -25,7 +23,7 @@ class Admin_model extends CI_Model
     public function getActiviteName($id)
     {
         $this->db->select("activite_name");
-        $this->db->from("activite");
+        $this->db->from("v_activie_dispo");
         $this->db->where("activite_id", $id);
         $res = $this->db->get();
         return $res->row_array()['activite_name'];
@@ -34,14 +32,14 @@ class Admin_model extends CI_Model
     public function getActivite()
     {
         $this->db->select("*");
-        $this->db->from("activite");
+        $this->db->from("v_activie_dispo");
         $res = $this->db->get();
         return $res->result_array();
     }
 
     public function deleteActivite($id)
     {
-        $this->db->query("DELETE FROM activite where activite_id = " . $id);
+        $this->db->query("INSERT INTO activite_non_dispo VALUES(default,$id)");
     }
 
     public function getDetail($id)
@@ -67,11 +65,11 @@ class Admin_model extends CI_Model
     {
         if ($id == "") {
             $this->db->select("*");
-            $this->db->from("parametre");
+            $this->db->from("v_parametre");
             return $this->db->get()->result_array();
         } else {
             $this->db->select("*");
-            $this->db->from("parametre");
+            $this->db->from("v_parametre");
             $this->db->where("id", $id);
             return $this->db->get()->row_array();
         }
@@ -86,7 +84,7 @@ class Admin_model extends CI_Model
 
     public function deleteParam($id)
     {
-        $sql = "DELETE FROM parametre WHERE id = %s";
+        $sql = "INSERT INTO parametre_non_dispo VALUES(default, %s)";
         $this->db->query(sprintf($sql, $id));
     }
 
@@ -94,5 +92,16 @@ class Admin_model extends CI_Model
     {
         $sql = "UPDATE parametre SET name = %s where id = %s";
         $this->db->query(sprintf($sql, $this->db->escape($data['param']), $data['param_id']));
+    }
+
+    public function addPlat($data)
+    {
+        $sql = "INSERT INTO food VALUES(default, %s)";
+        $this->db->query(sprintf($sql, $this->db->escape($data['plat'])));
+        $restrictions = $data['restriction'] == null ? [] :  $data['restriction'];
+        for ($i = 0; $i < count($restrictions); $i++) {
+            $this->db->query("INSERT INTO restriction VALUES(last_insert_id(), " . $restrictions[$i] . ")");
+        }
+        var_dump($restrictions);
     }
 }

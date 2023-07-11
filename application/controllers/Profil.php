@@ -46,7 +46,6 @@ class Profil extends CI_Controller
             'passwrd' => $this->input->post('password')
         );
         $_SESSION['tmp_user'] = $data;
-        // $this->db->insert('users', $data);
         $data = array();
         $data['param'] = $this->Profils_model->get_parametre();
         $this->load->view('login/information', $data);

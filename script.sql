@@ -22,6 +22,10 @@ CREATE TABLE activite(
     activite_name VARCHAR(100)
 );
 
+ALTER TABLE activite ENGINE = InnoDB;
+ALTER TABLE unite_activite ENGINE = InnoDB;
+ALTER TABLE users ENGINE = InnoDB;
+
 CREATE TABLE detail_activite(
     detail_activite_id SERIAL PRIMARY KEY,
     activite_id INT,
@@ -59,6 +63,10 @@ CREATE VIEW v_activie_dispo AS SELECT * FROM activite WHERE activite_id NOT IN (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50) NOT NULL
     );
+
+    CREATE TABLE parametre_non_dispo (id SERIAL PRIMARY KEY, parametre_id INT);
+
+    CREATE VIEW v_parametre AS SELECT * FROM parametre WHERE id NOT IN (select parametre_id FROM parametre_non_dispo);
 
     INSERT INTO Parametre(name) VALUES ( 'Diabete' ) , ( 'Tensionnaire' ) , ('No gluten') , ('goutte');
 
@@ -108,3 +116,5 @@ CREATE TABLE user_restriction(
     FOREIGN KEY (parametre_id) REFERENCES parametre (id),
     FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
+
+-- suite sql

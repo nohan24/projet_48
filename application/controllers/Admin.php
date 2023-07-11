@@ -34,6 +34,13 @@ class Admin extends CI_Controller
         }
     }
 
+    public function insertPlat()
+    {
+        $this->Admin_model->addPlat($_POST);
+        var_dump($_POST);
+        // redirect(site_url("admin/regime/plat"));
+    }
+
     public function activite($route, $id = null)
     {
         if ($route == "ajout") {
